@@ -1,0 +1,24 @@
+<h1 id="tableLabel">Scans</h1>
+
+<p *ngIf="!scans?.length"><em>-</em></p>
+
+<button [disabled]="!canCreateScan" type="button" class="btn btn-primary" (click)="createScan()">Create new</button>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="scans.length">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let scan of scans">
+      <td>{{ scan.id }}</td>
+      <td>{{ scan.name }}</td>
+      <td>{{ scan.status }}</td>
+      <td><button [disabled]="scan.status != 'completed' || !canDownload" class="btn" (click)="loadScan(scan)"><fa-icon [icon]="faDownload"></fa-icon></button></td>
+    </tr>
+  </tbody>
+</table>
