@@ -1,0 +1,34 @@
+<h1 id="tableLabel">Results</h1>
+
+<p *ngIf="!results?.length"><em>-</em></p>
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" (input)="filter()" (ngModel)="host" [(ngModel)]="host" placeholder="Search Host">
+
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="results.length">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Host</th>
+        <th>Date</th>
+        <th>Plugin</th>
+        <th>Severity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of resultsFiltered">
+        <td>{{ result.id }}</td>
+        <td>{{ result.hostName }}</td>
+        <td>{{ result.scanDate }}</td>
+        <td>{{ result.output }}</td>
+        <td>{{ result.severity }}</td>
+        <td><button class="btn" (click)="delete(result)"><fa-icon [icon]="faTrash"></fa-icon></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="input-group mb-3">
+    <button type="button" class="btn btn-primary" (click)="export()">Export</button>
+  </div>
+
